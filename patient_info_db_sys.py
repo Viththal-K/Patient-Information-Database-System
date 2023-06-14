@@ -7,7 +7,7 @@ class Hospital:
     def __init__(self, root):
         self.root = root
 
-        self.root.title("Hospital Management System")
+        self.root.title("Patient Information Database System")
         self.root.geometry('1030x650')
         self.root.resizable(False, False)
 
@@ -19,7 +19,7 @@ class Hospital:
         self.medication = StringVar()
         self.date = StringVar()
 
-        lbl_title = Label(self.root,text = "PATIENT DETAILS APPLICATION", font = ("times new roman", 25, "bold"), border=5,relief=RIDGE)
+        lbl_title = Label(self.root,text = "Patient Deatils Form", font = ("times new roman", 25), border=5,relief=RIDGE)
         lbl_title.pack(side=TOP,fill=X)
 
     # ================== Data Frame ======================
@@ -131,9 +131,9 @@ class Hospital:
         if self.name.get()=="" or self.ref.get()=="" or self.age.get()=="" or self.gender.get()=="" or self.illness.get()=="" or self.medication.get()=="" or self.date.get()=="":
             messagebox.showerror("Empty fields!")
         else:
-            conn = mysql.connector.connect(host="localhost",username="root",password="root",database="viththal_db")
+            conn = mysql.connector.connect(host="localhost",username="root",password="root",database="patient_db")
             my_cursor = conn.cursor()
-            my_cursor.execute("insert into hospital values(%s,%s,%s,%s,%s,%s,%s)", (self.name.get(),self.ref.get(),self.gender.get(),self.age.get(),self.illness.get(),self.medication.get(),self.date.get()))
+            my_cursor.execute("insert into patient_info values(%s,%s,%s,%s,%s,%s,%s)", (self.name.get(),self.ref.get(),self.gender.get(),self.age.get(),self.illness.get(),self.medication.get(),self.date.get()))
 
             conn.commit()
             self.fetch_data()
@@ -142,9 +142,9 @@ class Hospital:
 
 
     def fetch_data(self):
-        conn = mysql.connector.connect(host="localhost",username="root",password="root",database="viththal_db")
+        conn = mysql.connector.connect(host="localhost",username="root",password="root",database="patient_db")
         my_cursor = conn.cursor()
-        my_cursor.execute("select * from hospital")
+        my_cursor.execute("select * from patient_info")
         rows = my_cursor.fetchall()
         if len(rows) != 0:
             self.hosp_table.delete(*self.hosp_table.get_children())
@@ -178,9 +178,9 @@ class Hospital:
     
 
     def Delete(self):
-        conn = mysql.connector.connect(host="localhost",username="root",password="root",database="viththal_db")
+        conn = mysql.connector.connect(host="localhost",username="root",password="root",database="patient_db")
         my_cursor = conn.cursor()
-        my_cursor.execute("delete from hospital where Reference=%s", (self.ref.get(),))
+        my_cursor.execute("delete from patient_info where Reference=%s", (self.ref.get(),))
 
         
         conn.commit()
