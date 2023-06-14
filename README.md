@@ -26,7 +26,7 @@ This project provides the user with an interactive environment to manage patient
 
 3. Set up the MySQL database:
 - Install and configure MySQL on your system.
-- Make sure to change the username and password to your configuration
+- Make sure to change the username and password (set as "root" by default) to your configuration
 - Open MySQL Command Line Client
 - Execute the SQL script provided in database.sql to create the required database and table.
 
